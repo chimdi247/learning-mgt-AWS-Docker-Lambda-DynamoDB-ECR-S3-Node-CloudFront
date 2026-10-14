@@ -181,8 +181,10 @@ export const getUploadVideoUrl = async (
       ContentType: fileType,
     };
 
+    const cloudFrontDomain = process.env.CLOUDFRONT_DOMAIN || ''
+
     const uploadUrl = s3.getSignedUrl("putObject", s3Params);
-    const videoUrl = `${process.env.CLOUDFRONT_DOMAIN}/videos/${uniqueId}/${fileName}`;
+    const videoUrl = `${process.env.cloudFrontDomain}/videos/${uniqueId}/${fileName}`;
 
     res.json({
       message: "Upload URL generated successfully",

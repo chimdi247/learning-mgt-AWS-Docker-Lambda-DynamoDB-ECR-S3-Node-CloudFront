@@ -10,7 +10,7 @@ const customBaseQuery = async (
   extraOptions: any
 ) => {
   const baseQuery = fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || '',
     prepareHeaders: async (headers) => {
       const token = await window.Clerk?.session?.getToken();
       if (token) {
@@ -63,10 +63,10 @@ export const api = createApi({
   reducerPath: "api",
   tagTypes: ["Courses", "Users", "UserCourseProgress"],
   endpoints: (build) => ({
-    /* 
+    /*
     ===============
     USER CLERK
-    =============== 
+    ===============
     */
     updateUser: build.mutation<User, Partial<User> & { userId: string }>({
       query: ({ userId, ...updatedUser }) => ({
@@ -77,10 +77,10 @@ export const api = createApi({
       invalidatesTags: ["Users"],
     }),
 
-    /* 
+    /*
     ===============
     COURSES
-    =============== 
+    ===============
     */
     getCourses: build.query<Course[], { category?: string }>({
       query: ({ category }) => ({
@@ -146,10 +146,10 @@ export const api = createApi({
       }),
     }),
 
-    /* 
+    /*
     ===============
     TRANSACTIONS
-    =============== 
+    ===============
     */
     getTransactions: build.query<Transaction[], string>({
       query: (userId) => `transactions?userId=${userId}`,
@@ -172,10 +172,10 @@ export const api = createApi({
       }),
     }),
 
-    /* 
+    /*
     ===============
     USER COURSE PROGRESS
-    =============== 
+    ===============
     */
     getUserEnrolledCourses: build.query<Course[], string>({
       query: (userId) => `users/course-progress/${userId}/enrolled-courses`,
