@@ -7,13 +7,13 @@ import UserCourseProgress from "../models/userCourseProgressModel";
 
 dotenv.config();
 
-if (!process.env.STRIPE_SECRET_KEY || '') {
+if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error(
     "STRIPE_SECRET_KEY os required but was not found in env variables"
   );
 }
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '');
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const listTransactions = async (
   req: Request,

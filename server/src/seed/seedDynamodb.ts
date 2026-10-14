@@ -30,7 +30,7 @@ if (!isProduction) {
   });
 } else {
   client = new DynamoDBClient({
-    region: process.env.AWS_REGION || "us-east-1",
+    region: process.env.AWS_REGION || "eu-west-2",
   });
 }
 
